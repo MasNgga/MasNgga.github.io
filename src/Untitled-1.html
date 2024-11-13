@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Tambahkan SweetAlert2 di dalam file HTML Anda -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function tampilkanPesanGagal() {
+            Swal.fire({
+                title: 'Pembayaran Gagal!',
+                text: 'Maaf, terjadi kesalahan saat memproses pembayaran Anda.',
+                icon: 'error',
+                confirmButtonText: 'Coba Lagi'
+            });
+        }
+    </script>
+
+
+    <button onclick="tampilkanPesanGagal()">Test Pembayaran Gagal</button>
+
+
+
+
+
+</head>
+
+<body>
+
+</body>
+
+</html>

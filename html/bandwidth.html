@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasNgga.Net</title>
+    <link rel="icon" href="/img/logo.png">
+
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- font awesome icon -->
+    <script src="https://kit.fontawesome.com/b3139f7467.js" crossorigin="anonymous"></script>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- // konversi rupiah -->
+    <script>
+        const rupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+            }).format(number);
+        };</script>
+
+    <!-- alpine js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <!-- midtrans -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-wlAefoHGXi1PJ_PO"></script>
+
+
+    <!-- AOS for Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+
+</head>
+
+<body>
+    <!-- navbar start -->
+    <nav class="navbar" x-data>
+        <a href="#" class="navbar-logo"></i>MasNgga.<span>Net <i data-feather="rss" class="rss"></i></span></a>
+
+        <div class="navbar-nav">
+            <a href="/index.html">Home</a>
+            <a href="/html/about.html">Tentang Kami</a>
+            <a href="/html/bandwidth.html">Internet</a>
+            <a href="/html/shop.html">Toko</a>
+            <a href="/html/contact.html">Kontak Kami</a>
+        </div>
+
+        <div class="navbar-extra">
+            <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span></a>
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+
+        <!-- search from start -->
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="search here...">
+            <label for="search-box"><i data-feather="search" class="transition"></i></label>
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+        <!-- seacrh from end -->
+
+
+        <!-- shopping cart start -->
+        <div class="shopping-cart">
+            <template x-for="(item, index) in $store.cart.items" x-keys="index">
+                <div class="cart-item">
+                    <img :src="`/img/produk/${item.img}`" :alt="item.name">
+                    <div class="item-detail">
+                        <h3 x-text="item.name"></h3>
+                        <div class="item-price">
+                            <span x-text="rupiah(item.price)"></span> &times;
+                            <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+                            <span x-text="item.quantity"></span>
+                            <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+                            <span x-text="rupiah(item.total)"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
+            <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+            <div class="form-container" x-show="$store.cart.items.length">
+                <form action="" id="checkoutForm">
+                    <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+                    <input type="hidden" name="total" x-model="($store.cart.total)">
+                    <h5>Customer Detail</h5>
+
+                    <label for="name">
+                        <span>Name</span>
+                        <input type="text" name="name" id="name">
+                    </label>
+
+
+
+                    <label for="email">
+                        <span>Email</span>
+                        <input type="email" name="email" id="email">
+                    </label>
+
+
+
+                    <label for="phone">
+                        <span>Phone</span>
+                        <input type="number" name="phone" id="phone" autocomplete="off">
+                    </label>
+
+
+                    <label for="address">
+                        <span>Address</span>
+                        <input type="text" name="address" id="address">
+                    </label>
+
+                    <button class="checkout-button disabled" type="submit" id="checkout-button"
+                        value="checkout">Checkout</button>
+
+
+                </form>
+            </div>
+
+
+
+        </div>
+        <!-- shopping cart end -->
+
+
+
+
+    </nav>
+    <!-- navbar end -->
+
+
+
+
+
+    <!-- Menu Section Start -->
+    <section id="internet" class="menu" data-aos="fade-up" data-aos-duration="1000">
+        <h2>Internet<span> Super</span> Cepat</h2>
+        <p>Nikmati koneksi internet cepat dan stabil dengan bandwidth tinggi dari MasNgga.net. Kami menyediakan berbagai
+            paket bandwidth yang sesuai dengan kebutuhan Anda, baik untuk penggunaan rumahan hingga bisnis besar.</p>
+
+        <div class="row" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="menu-card">
+                <img src="/img/menu/1.jpg" alt="Paket 5 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">5 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 115K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/2.jpg" alt="Paket 10 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">10 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 150K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/3.jpg" alt="Paket 15 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">15 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 195K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/4.jpg" alt="Paket 20 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">20 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 235K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/5.jpg" alt="Paket 30 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">30 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 300K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/6.jpg" alt="Paket 40 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">40 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 375K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/7.jpg" alt="Paket 50 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">50 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 425K</strong></p>
+
+            </div>
+            <div class="menu-card">
+                <img src="/img/menu/8.jpg" alt="Paket 100 Mbps" class="menu-card-img">
+                <h3 class="menu-card-title">100 Mbps</h3>
+                <p class="menu-card-price"><strong>IDR 525K</strong></p>
+
+            </div>
+            <!-- ... kartu lainnya -->
+        </div>
+    </section>
+    <!-- Menu Section End -->
+
+
+
+
+
+
+    <!-- contact section start -->
+
+    <section id=contact class="contact" data-aos="fade-up" data-aos-duration="1000">
+        <h2><span>Kontak </span>Kami</h2>
+        <p>Kontak kami untuk berlangganan Internet Super Cepat</p>
+
+
+        <div class="row">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d988.8545083392856!2d112.56361621052018!3d-7.529300641697639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7875501f654001%3A0x8cf03c56b80340e2!2sLOUNDRY%20%26%20KOST%20BU%20ATIK!5e0!3m2!1sid!2sid!4v1731463729006!5m2!1sid!2sid"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"
+                data-aos="zoom-in" data-aos-duration="1000"></iframe>
+            <form action="" id="contactform">
+                <div class="input-group">
+                    <i data-feather="user"></i>
+                    <input type="text" placeholder="Nama" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <i data-feather="mail"></i>
+                    <input type="email" placeholder="Email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <i data-feather="phone"></i>
+                    <input type="tel" placeholder="Nomer HP" id="phone" name="phone" required>
+                </div>
+                <div class="input-group">
+                    <i data-feather="map-pin"></i>
+                    <input type="text" placeholder="Alamat" id="address" name="address" required>
+                </div>
+
+                <button type="button" class="btn disabled" id="contactButton" disabled><i data-feather="send"
+                        class="send"></i> Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+    <!-- contact section end -->
+
+    <!-- footer start -->
+    <footer>
+        <div class="socials">
+            <a href="https://www.instagram.com/angga_ardhiyansah/"> <i data-feather="instagram"></i></a>
+            <a href="#"><i class="hgi-stroke hgi-tiktok"></i></a>
+        </div>
+        <div class="links">
+            <a href="/index.html">Home</a>
+            <a href="/html/about.html">Tentang Kami</a>
+            <a href="/html/bandwidth.html">Internet</a>
+            <a href="/html/shop.html">Toko</a>
+            <a href="/html/contact.html">Kontak Kami</a>
+        </div>
+        <div class="credits">
+            <p>Created by <a href="">Anggara Dwi Ardhiyansah</a>.| &copy; 2024. </p>
+
+        </div>
+
+    </footer>
+    <!-- footer end -->
+
+    <!-- Modal Box Item Detail Start -->
+    <div x-data="products" class="modal" id="item-detail-modal">
+        <div class="modal-container">
+            <a href="#" @click.prevent="closeModal" class="close-icon" id="modal-close">
+                <i data-feather="x"></i>
+            </a>
+            <div class="modal-content">
+                <img :src="'/img/produk/' + currentProduct.img" :alt="currentProduct.name" id="modal-product-img">
+                <div class="product-content">
+                    <h3 id="modal-product-name" x-text="currentProduct.name"></h3>
+                    <p id="modal-product-description" x-text="currentProduct.name"></p>
+
+
+                    <div class="modal-stars">
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                        <i data-feather="star" class="star-full"></i>
+                    </div>
+                    <div class="modal-price" id="modal-product-price">
+                        IDR <span x-text="rupiah(currentProduct.price)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Box Item Detail End -->
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+        });
+    </script>
+
+
+
+
+    <!-- feather icons -->
+    <script>
+        feather.replace();
+    </script>
+
+    <!-- my java script -->
+    <script src="/js/script.js"></script>
+    <!-- app -->
+    <script src="/src/app.js" async></script>
+    <script>
+        AOS.init();
+    </script>
+
+
+
+
+
+</body>
+
+</html>

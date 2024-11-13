@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasNgga.Net</title>
+    <link rel="icon" href="/img/logo.png">
+
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- font awesome icon -->
+    <script src="https://kit.fontawesome.com/b3139f7467.js" crossorigin="anonymous"></script>
+
+    <!-- my css -->
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+    <!-- alpine js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- app -->
+    <script src="/src/app.js" async></script>
+
+    <!-- midtrans -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-wlAefoHGXi1PJ_PO"></script>
+
+    <!-- AOS for Animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+</head>
+
+<body>
+    <!-- navbar start -->
+    <nav class="navbar" x-data>
+        <a href="#" class="navbar-logo"></i>MasNgga.<span>Net <i data-feather="rss" class="rss"></i></span></a>
+
+        <div class="navbar-nav">
+            <a href="/index.html">Home</a>
+            <a href="/html/about.html">Tentang Kami</a>
+            <a href="/html/bandwidth.html">Internet</a>
+            <a href="/html/shop.html">Toko</a>
+            <a href="/html/contact.html">Kontak Kami</a>
+        </div>
+
+        <div class="navbar-extra">
+            <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span></a>
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+
+        <!-- search from start -->
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="search here...">
+            <label for="search-box"><i data-feather="search" class="transition"></i></label>
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+        <!-- seacrh from end -->
+
+
+        <!-- shopping cart start -->
+        <div class="shopping-cart">
+            <template x-for="(item, index) in $store.cart.items" x-keys="index">
+                <div class="cart-item">
+                    <img :src="`/img/produk/${item.img}`" :alt="item.name">
+                    <div class="item-detail">
+                        <h3 x-text="item.name"></h3>
+                        <div class="item-price">
+                            <span x-text="rupiah(item.price)"></span> &times;
+                            <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+                            <span x-text="item.quantity"></span>
+                            <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+                            <span x-text="rupiah(item.total)"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
+            <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+            <div class="form-container" x-show="$store.cart.items.length">
+                <form action="" id="checkoutForm">
+                    <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+                    <input type="hidden" name="total" x-model="($store.cart.total)">
+                    <h5>Customer Detail</h5>
+
+                    <label for="name">
+                        <span>Name</span>
+                        <input type="text" name="name" id="name">
+                    </label>
+
+
+
+                    <label for="email">
+                        <span>Email</span>
+                        <input type="email" name="email" id="email">
+                    </label>
+
+
+
+                    <label for="phone">
+                        <span>Phone</span>
+                        <input type="number" name="phone" id="phone" autocomplete="off">
+                    </label>
+
+
+                    <label for="address">
+                        <span>Address</span>
+                        <input type="text" name="address" id="address">
+                    </label>
+
+                    <button class="checkout-button disabled" type="submit" id="checkout-button"
+                        value="checkout">Checkout</button>
+
+
+                </form>
+            </div>
+
+
+
+        </div>
+        <!-- shopping cart end -->
+
+
+
+
+    </nav>
+    <!-- navbar end -->
+
+    <!-- About Section with Zig-Zag Layout -->
+    <section id="about" class="about" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+        <h2><span>Tentang </span>Kami</h2>
+
+        <!-- Row 1 - Zig-Zag Layout -->
+        <div class="row">
+            <div class="about-img" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+                <img src="/img/angga.jpg" alt="Anggara Dwi Ardhiyansah" class="rounded-shadow">
+            </div>
+            <div class="content" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                <h3>Anggara Dwi Ardhiyansah</h3>
+                <p><span class="high
+                    ht">MasNgga.Net </span> didirikan oleh <span class="highlight">Anggara Dwi
+                        Ardhiyansah</span>, dengan pengalaman lebih dari
+                    17 tahun, MasNgga.Net menyediakan layanan terbaik untuk rumah tangga,
+                    bisnis kecil, hingga perusahaan besar.</p>
+            </div>
+        </div>
+
+        <!-- Row 2 - Zig-Zag Layout -->
+        <div class="row reverse">
+            <div class="about-img" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                <img src="/img/toko.webp" alt="Tentang Kami" class="rounded-shadow">
+            </div>
+            <div class="content" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+                <h3>Mengapa Harus di MasNgga.<span>Net</span>?</h3>
+                <p>Anyu.net adalah perusahaan terkemuka dalam industri jaringan yang menawarkan solusi lengkap untuk
+                    kebutuhan konektivitas dan komunikasi.Kami menawarkan berbagai solusi jaringan seperti instalasi
+                    Wi-Fi, penjualan perangkat berkualitas,
+                    serta solusi fiber optik untuk koneksi cepat dan stabil</p>
+                <ul class="advantages">
+                    <li data-aos="zoom-in"><i data-feather="wifi"></i>Instalasi WiFi untuk rumah dan bisnis</li>
+                    <li data-aos="zoom-in" data-aos-delay="200"><i data-feather="settings"></i>Penjualan perangkat
+                        jaringan</li>
+                    <li data-aos="zoom-in" data-aos-delay="400"><i data-feather="shield"></i>Solusi jaringan fiber
+                        optik</li>
+                    <li data-aos="zoom-in" data-aos-delay="600"><i data-feather="lock"></i>Sistem keamanan jaringan
+                    </li>
+                </ul>
+                <p class="cta-text" data-aos="fade-up">Percayakan jaringan Anda kepada kami dan nikmati koneksi internet
+                    yang cepat dan stabil.</p>
+            </div>
+        </div>
+        <!-- Documentation Section Start -->
+        <section id="documentation" class="documentation" data-aos="fade-up">
+            <h2>Dokumentasi <span>Lapangan</span></h2>
+            <p>Lihat dokumentasi Lapangan kami
+            </p>
+
+            <!-- Gallery of Images -->
+            <div class="gallery">
+                <div class="gallery-item" data-aos="zoom-in">
+                    <img src="/img/dokumentasi1.jpg" alt="Proyek 1 - Sebelum">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="/img/dokumentasi3.png" alt="Proyek 1 - Sesudah">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="/img/dokumentasi2.jpg" alt="Proyek 1 - Sesudah">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="/img/dokumentasi4.jpg" alt="Proyek 1 - Sesudah">
+                </div>
+                <!-- Tambahkan lebih banyak proyek di sini -->
+            </div>
+        </section>
+        <!-- Documentation Section End -->
+
+        </div>
+    </section>
+
+
+    <!-- footer start -->
+    <footer>
+        <div class="socials">
+            <a href="https://www.instagram.com/angga_ardhiyansah/"> <i data-feather="instagram"></i></a>
+            <a href="#"><i class="hgi-stroke hgi-tiktok"></i></a>
+        </div>
+        <div class="links">
+            <a href="/index.html">Home</a>
+            <a href="/html/about.html">Tentang Kami</a>
+            <a href="/html/bandwidth.html">Internet</a>
+            <a href="/html/shop.html">Toko</a>
+            <a href="/html/contact.html">Kontak Kami</a>
+        </div>
+        <div class="credits">
+            <p>Created by <a href="">Anggara Dwi Ardhiyansah</a>.| &copy; 2024. </p>
+
+        </div>
+
+    </footer>
+    <!-- footer end -->
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+        });
+    </script>
+
+
+
+
+    <!-- feather icons -->
+    <script>
+        feather.replace();
+    </script>
+
+    <!-- my java script -->
+    <script src="/js/script.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
+
+</body>
+
+</html>
