@@ -142,6 +142,12 @@ checkoutbutton.addEventListener('click', async function (e) {
     const data = new URLSearchParams(formData);
     const objdata = Object.fromEntries(data);
 
+
+    const message = formatmessage(objdata);
+    window.open('https://api.whatsapp.com/send?phone=6282142944326&text=' + encodeURIComponent(message), '_blank');
+
+    /*HILANGKAN COMMENT APABILA INGIN MENGGUNAKAN TRANSAKSI DENGAN MIDTRANS
+
     // minta transaction token menggunakan ajax/fetch
     try {
         const response = await fetch('/php/payment.php', {
@@ -188,7 +194,7 @@ checkoutbutton.addEventListener('click', async function (e) {
         });
     } catch (err) {
         console.log(err.message);
-    }
+    }*/
 });
 
 
@@ -205,9 +211,6 @@ Data Pesanan
     TOTAL : ${rupiah(obj.total)} 
     Terima Kasih.`;
 };
-
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const contactbtn = document.querySelector('#contactButton');
