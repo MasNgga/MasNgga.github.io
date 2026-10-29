@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const objdata = Object.fromEntries(data);
 
         const message = formatMessage(objdata);
-        const waUrl = 'https://api.whatsapp.com/send?phone=6282142944326&text=' + encodeURIComponent(message);
+        const waUrl = 'https://api.whatsapp.com/send?phone=6285607260422&text=' + encodeURIComponent(message);
         window.open(waUrl, '_blank');
 
     });
