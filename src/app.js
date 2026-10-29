@@ -144,7 +144,7 @@ checkoutbutton.addEventListener('click', async function (e) {
 
 
     const message = formatmessage(objdata);
-    window.open('https://api.whatsapp.com/send?phone=6282142944326&text=' + encodeURIComponent(message), '_blank');
+    window.open('https://api.whatsapp.com/send?phone=6285607260422&text=' + encodeURIComponent(message), '_blank');
 
     /*HILANGKAN COMMENT APABILA INGIN MENGGUNAKAN TRANSAKSI DENGAN MIDTRANS
 
